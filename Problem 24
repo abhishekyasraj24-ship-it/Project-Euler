@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+void solve() {
+    string s = "0123456789";
+    vector < string > v;
+    do {
+        v.push_back(s);
+    } while (next_permutation(s.begin(), s.end()));
+    cout << v[999999] << endl;
+}
+
+int32_t main() {
+    int t;
+    t=1;
+    cin >> t;
+    while (t--) {
+        solve();
+    }
+}
