@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+bool isPal(string s) {
+    int l = 0, r = s.size() - 1;
+    while (l < r) {
+        if (s[l] != s[r]) return false;
+        l++, r--;
+    }
+    return true;
+}
+
+string add(string s) {
+    string r = s;
+    reverse(r.begin(), r.end());
+    int a = 0, b = 0;
+    for (int i = 0; i < s.size(); i++) {
+        a += (s[i] - '0');
+        b += (r[i] - '0');
+        if (i == s.size() - 1) break;
+        a *= 10;
+        b *= 10;
+    }
+    int x = a + b;
+    string res = to_string(x);
+    return res;
+}
+
+void solve() {
+    int ans = 0;
+    for (int i = 1; i < 10000; i++) {
+        string s = to_string(i);
+        bool ok = true;
+        for (int j = 0; j < 50; j++) {
+            s = add(s);
+            if (isPal(s)) {
+                ok = false;
+                break;
+            }
+        }
+        if (ok) ans++;
+    }
+    cout << ans << '\n';
+}
+
+int32_t main() {
+    solve();
+}
