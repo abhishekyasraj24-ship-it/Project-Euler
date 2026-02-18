@@ -1,0 +1,61 @@
+//C++ CODE
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+string add(string a, string b) {
+    if (a.size() < b.size()) swap(a, b);
+    reverse(a.begin(), a.end());
+    reverse(b.begin(), b.end());
+    string res = "";
+    int carry = 0;
+    for (int i = 0; i < a.size(); i++) {
+        int x = a[i] - '0';
+        int y = (i < b.size() ? b[i] - '0' : 0);
+        int sum = x + y + carry;
+        res += char('0' + sum % 10);
+        carry = sum / 10;
+    }
+    if (carry) res += char('0' + carry);
+    reverse(res.begin(), res.end());
+    return res;
+}
+
+int main() {
+    string a = "3", b = "2";
+    int k = 0;
+    for (int i = 1; i <= 1000; i++) {
+        if (a.size() > b.size())
+            k++;
+        string f = a, g = b;
+        a = add(f, add(g, g));
+        b = add(f, g);
+    }
+
+    cout << k << endl;
+}
+
+//Python Code
+def count(a):
+    count=0
+    x=a
+    while x!=0:
+        x//=10;
+        count+=1
+    return count
+
+
+a=3
+b=2
+ans=0
+for i in range(1,1001):
+    f=a
+    g=b
+    if(count(a)>count(b)):
+        print(a,"/" ,b)
+        ans+=1
+    a=f+2*g
+    b=f+g
+
+print(ans)
