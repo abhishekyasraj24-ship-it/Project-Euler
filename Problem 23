@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+#define ll __int128
+
+vector < int > di(int n) {
+    vector < int > a;
+    for (int i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            if (i != n) a.push_back(i);
+            if (i != n / i && n / i != n) a.push_back(n / i);
+        }
+    }
+    return a;
+}
+
+void solve() {
+    vector < int > ab;
+    for (int i = 1; i <= 28123; i++) {
+        vector < int > p = di(i);
+        int s = accumulate(p.begin(), p.end(), 0LL);
+        if (s > i) ab.push_back(i);
+    }
+    set < int > ans;
+    for (int i = 0; i < (int) ab.size(); i++) {
+        for (int j = i; j < (int) ab.size(); j++) ans.insert(ab[i] + ab[j]);
+    }
+    vector < int > v(28123 * 2 + 1);
+    for (auto c: ans) v[c]++;
+    int k = 0;
+    for (int i = 1; i <= 28123; i++) {
+        if (v[i]) continue;
+        k += i;
+    }
+    cout << k << '\n';
+}
+
+int32_t main() {
+    solve();
+}
