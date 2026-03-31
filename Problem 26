@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+#define ll __int128
+
+int cycle(int n) {
+    int rem = 1;
+    int pos = 0;
+    map<int, int> v;
+    while (rem != 0 && !v.count(rem)) {
+        v[rem] = pos;
+        rem = (rem * 10) % n;
+        pos++;
+    }
+    if (rem == 0) return 0;
+    return pos - v[rem];
+}
+
+void solve() {
+    int best = 0, ans = 0;
+    for (int d = 2; d < 1000; d++) {
+        int l = cycle(d);
+        if (l > best) {
+            best = l;
+            ans = d;
+        }
+    }
+    cout << ans << '\n';
+}
+
+int32_t main() {
+    solve();
+}
