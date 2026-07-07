@@ -1,0 +1,38 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+bool isPrime(int n) {
+    if (n < 2) return false;
+    if (n == 2 || n == 3) return true;
+    if (n % 2 == 0 || n % 3 == 0) return false;
+    for (int i = 5; i * i <= n; i += 6) {
+        if (n % i == 0 || n % (i + 2) == 0) return false;
+    }
+    return true;
+}
+
+int check(int a, int b) {
+    int i = 0;
+    while (isPrime(i * i + a * i + b)) i++;
+    return i;
+}
+
+void solve() {
+    int ma = 0, ans;
+    for (int a = -999; a < 1000; a++) {
+        for (int b = -1000; b <= 1000; b++) {
+            int k = ma;
+            ma = max(ma, check(a, b));
+            if (ma > k) ans = a * b;
+
+        }
+    }
+    cout << ans << '\n';
+}
+
+int32_t main() {
+    solve();
+}
