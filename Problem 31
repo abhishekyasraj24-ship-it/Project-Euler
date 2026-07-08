@@ -1,0 +1,22 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+#define ll __int128
+
+void solve() {
+    vector < int > a={1,2,5,10,20,50,100,200};
+    vector < int > dp(201, 0);
+    //dp[i]=number of ways to make i using the elements of a
+    dp[0] = 1;
+    for (int j = 0; j < (int) a.size(); j++) {
+        for (int i = a[j]; i <= 200; i++) dp[i] += dp[i - a[j]];
+    }
+    cout << dp[200] << '\n';
+}
+
+int32_t main() {
+    solve();
+}
