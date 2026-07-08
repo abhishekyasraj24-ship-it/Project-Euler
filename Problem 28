@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+#define int long long
+
+#define ll __int128
+
+void solve() {
+    vector < int > v;
+    v.push_back(1);
+    int c = 1;
+    for (int d = 2;; d += 2) {
+        bool ok = false;
+        for (int i = 0; i < 4; i++) {
+            c += d;
+            if (c > 1001 * 1001) {
+                ok = true;
+                break;
+            }
+            v.push_back(c);
+        }
+        if (ok) break;
+    }
+    int s = accumulate(v.begin(), v.end(), 0LL);
+    cout << s << '\n';
+}
+
+int32_t main() {
+    solve();
+}
